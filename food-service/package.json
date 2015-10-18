@@ -4,6 +4,7 @@
   "description": "Microservice for managing Food Items as part of the Meal Planner Application",
   "main": "src/main/index.js",
   "scripts": {
+    "start": "grunt start",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Graham Cox <graham@grahamcox.co.uk>",
@@ -11,6 +12,7 @@
   "devDependencies": {
     "grunt": "^0.4.5",
     "grunt-cli": "^0.1.13",
+    "grunt-execute": "^0.2.2",
     "jit-grunt": "^0.9.1",
     "time-grunt": "^1.2.1"
   }
