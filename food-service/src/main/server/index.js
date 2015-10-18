@@ -1,4 +1,5 @@
 const Hapi = require('hapi');
+const path = require('path');
 
 function startServer() {
     const server = new Hapi.Server();
@@ -28,7 +29,13 @@ function startServer() {
     }, {
         register: require('hapi-routes-status'),
         options: {
-            
+
+        }
+    }, {
+        register: require('hapi-router'),
+        options: {
+            cwd: __dirname,
+            routes: 'routes/*.js'
         }
     }, {
         register: require('blipp'),
