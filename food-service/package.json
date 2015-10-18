@@ -17,6 +17,11 @@
     "time-grunt": "^1.2.1"
   },
   "dependencies": {
-    "hapi": "^11.0.0"
+    "blipp": "^2.3.0",
+    "good": "^6.4.0",
+    "good-console": "^5.1.0",
+    "hapi": "^11.0.0",
+    "hapi-info": "^1.1.0",
+    "hapi-routes-status": "^2.1.1"
   }
 }
