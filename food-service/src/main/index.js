@@ -1,3 +1,3 @@
-const name = "Graham";
+const server = require('./server');
 
-console.log(`Hello, ${name}`);
+server.startServer();
