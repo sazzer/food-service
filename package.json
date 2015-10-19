@@ -3,11 +3,18 @@
   "version": "0.0.1",
   "description": "Meal Planner Application",
   "scripts": {
-    "install": "npm-workspace install"
+    "install": "npm-workspace install && grunt build",
+    "test": "grunt test"
   },
   "author": "Graham Cox <graham@grahamcox.co.uk>",
   "license": "ISC",
   "devDependencies": {
     "npm-workspace": "git://github.com/sazzer/npm-workspace.git"
+  },
+  "dependencies": {
+    "grunt-cli": "^0.1.13",
+    "grunt-hub": "^0.7.0",
+    "jit-grunt": "^0.9.1",
+    "time-grunt": "^1.2.1"
   }
 }
