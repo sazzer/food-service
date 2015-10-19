@@ -4,8 +4,9 @@
   "description": "Microservice for managing Food Items as part of the Meal Planner Application",
   "main": "src/main/index.js",
   "scripts": {
+    "install": "grunt",
     "start": "grunt start",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "grunt test"
   },
   "author": "Graham Cox <graham@grahamcox.co.uk>",
   "license": "ISC",
