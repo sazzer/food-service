@@ -1,3 +1,5 @@
+var pkg = require('./package');
+
 module.exports = function(grunt) {
     require('jit-grunt')(grunt, {
         mochacov: 'grunt-mocha-cov'
@@ -18,7 +20,7 @@ module.exports = function(grunt) {
         },
         shell: {
             dockerBuild: {
-                command: 'docker build -t foodplan/food-service:latest -t foodplan/food-service:0.0.1 .',
+                command: 'docker build -t foodplan/food-service:latest -t foodplan/food-service:' + pkg.version + ' .',
                 options: {
                     stdout: true,
                     stderr: false,
@@ -27,13 +29,51 @@ module.exports = function(grunt) {
                     }
                 }
             }
+        },
+        eslint: {
+            options: {
+                configFile: "eslintrc"
+            },
+            main: {
+                files: [{
+                    expand: true,
+                    cwd: 'src/main',
+                    src: ["**/*.js"]
+                }]
+            },
+            test: {
+                options: {
+                    envs: ["mocha"]
+                },
+                files: [{
+                    expand: true,
+                    cwd: 'src/test',
+                    src: ["**/*.js"]
+                }]
+            },
+        },
+        watch: {
+            server: {
+                files: [
+                    'package.json',
+                    'GruntFile.js',
+                    'src/**/*'
+                ],
+                tasks: ['default'],
+                options: {
+                    spawn: true,
+                    interrupt: true,
+                    atBegin: true
+                }
+            }
         }
     });
 
-    grunt.registerTask('build', []);
-    grunt.registerTask('doc', []);
+    grunt.registerTask('lint', ['eslint:main', 'eslint:test']);
+
+    grunt.registerTask('build', ['lint']);
     grunt.registerTask('test', ['build', 'mochacov:server']);
     grunt.registerTask('start', ['build', 'execute:server']);
 
-    grunt.registerTask('default', ['build', 'doc', 'test']);
+    grunt.registerTask('default', ['build', 'test']);
 };
