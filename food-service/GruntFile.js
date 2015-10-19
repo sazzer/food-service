@@ -16,14 +16,36 @@ module.exports = function(grunt) {
             },
             server: ['src/test/**/*-spec.js']
         },
+        eslint: {
+            options: {
+                configFile: "eslintrc"
+            },
+            main: {
+                files: [{
+                    expand: true,
+                    cwd: 'src/main',
+                    src: ["**/*.js"]
+                }]
+            },
+            test: {
+                options: {
+                    envs: ["mocha"]
+                },
+                files: [{
+                    expand: true,
+                    cwd: 'src/test',
+                    src: ["**/*.js"]
+                }]
+            },
+        },
         watch: {
-            build: {
+            server: {
                 files: [
                     'package.json',
                     'GruntFile.js',
                     'src/**/*'
                 ],
-                tasks: ['build'],
+                tasks: ['default'],
                 options: {
                     spawn: true,
                     interrupt: true,
@@ -33,9 +55,11 @@ module.exports = function(grunt) {
         }
     });
 
-    grunt.registerTask('build', []);
+    grunt.registerTask('lint', ['eslint:main', 'eslint:test']);
+
+    grunt.registerTask('build', ['lint']);
     grunt.registerTask('test', ['build', 'mochacov:server']);
     grunt.registerTask('start', ['build', 'execute:server']);
 
-    grunt.registerTask('default', ['build', 'doc', 'test']);
+    grunt.registerTask('default', ['build', 'test']);
 };
