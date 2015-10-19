@@ -15,11 +15,25 @@ module.exports = function(grunt) {
                 reporter: 'spec'
             },
             server: ['src/test/**/*-spec.js']
+        },
+        watch: {
+            build: {
+                files: [
+                    'package.json',
+                    'GruntFile.js',
+                    'src/**/*'
+                ],
+                tasks: ['build'],
+                options: {
+                    spawn: true,
+                    interrupt: true,
+                    atBegin: true
+                }
+            }
         }
     });
 
     grunt.registerTask('build', []);
-    grunt.registerTask('doc', []);
     grunt.registerTask('test', ['build', 'mochacov:server']);
     grunt.registerTask('start', ['build', 'execute:server']);
 
