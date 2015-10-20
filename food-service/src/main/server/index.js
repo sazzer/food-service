@@ -1,5 +1,6 @@
 const Hapi = require('hapi');
 const path = require('path');
+const pkg = require('../../../package');
 
 function startServer() {
     const server = new Hapi.Server();
@@ -8,6 +9,24 @@ function startServer() {
     });
 
     server.register([{
+        register: require('inert')
+    }, {
+        register: require('vision')
+    }, {
+        register: require('hapi-swaggered'),
+        options: {
+            info: {
+                title: pkg.name,
+                version: pkg.version
+            }
+        }
+    }, {
+        register: require('hapi-swaggered-ui'),
+        options: {
+            title: 'API Details',
+            path: '/docs'
+        }
+    }, {
         register: require('good'),
         options: {
             opsInterval: 1000,
