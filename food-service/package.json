@@ -23,6 +23,7 @@
   },
   "dependencies": {
     "blipp": "^2.3.0",
+    "boom": "^2.9.0",
     "good": "^6.4.0",
     "good-console": "^5.1.0",
     "hapi": "^11.0.0",
