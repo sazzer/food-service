@@ -2,7 +2,7 @@ const Boom = require('boom');
 
 module.exports = [
     {
-        path: '/api',
+        path: '/food',
         method: 'GET',
         config: {
             tags: ['api'],
