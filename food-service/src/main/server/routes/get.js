@@ -10,6 +10,9 @@ module.exports = [
             description: 'Load an existing food item',
             handler: (request, reply) => {
                 FoodLoader.loadById(request.params.foodId)
+                    .catch((e) => {
+                        return Boom.notFound(e.message);
+                    })
                     .then(reply);
             }
         }
