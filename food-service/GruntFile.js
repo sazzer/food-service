@@ -24,6 +24,26 @@ module.exports = function(grunt) {
                 }
             }
         },
+        esdoc: {
+            server: {
+                options: {
+                    source: 'src/main',
+                    destination: './target/doc',
+                    access: ['public', 'protected', 'private'],
+                    autoPrivate: true,
+                    unexportIdentifier: true,
+                    undocumentIdentifier: true,
+                    builtinExternal: true,
+                    coverage: true,
+                    test: {
+                        type: 'mocha',
+                        source: 'src/test',
+                        includes: ['-spec.js$']
+                    },
+                    title: pkg.name
+                }
+            }
+        },
         shell: {
             dockerBuild: {
                 command: 'docker build -t foodplan/food-service:latest -t foodplan/food-service:' + pkg.version + ' .',
@@ -77,7 +97,7 @@ module.exports = function(grunt) {
 
     grunt.registerTask('lint', ['eslint:main', 'eslint:test']);
 
-    grunt.registerTask('build', ['lint']);
+    grunt.registerTask('build', ['lint', 'esdoc:server']);
     grunt.registerTask('test', ['build', 'mocha_istanbul:server']);
     grunt.registerTask('start', ['build', 'execute:server']);
 
