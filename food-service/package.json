@@ -11,6 +11,7 @@
   "author": "Graham Cox <graham@grahamcox.co.uk>",
   "license": "ISC",
   "devDependencies": {
+    "chai": "^3.4.0",
     "grunt": "^0.4.5",
     "grunt-cli": "^0.1.13",
     "grunt-contrib-watch": "^0.6.1",
