@@ -54,7 +54,7 @@ function startServer() {
         register: require('hapi-router'),
         options: {
             cwd: __dirname,
-            routes: 'routes/*.js'
+            routes: 'routes/**/*.js'
         }
     }, {
         register: require('blipp'),

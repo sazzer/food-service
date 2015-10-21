@@ -1,5 +1,5 @@
 const Boom = require('boom');
-const FoodLoader = require('../../food/loader');
+const FoodLoader = require('../../../food/loader');
 
 module.exports = [
     {
