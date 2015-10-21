@@ -17,9 +17,11 @@
     "grunt-contrib-watch": "^0.6.1",
     "grunt-eslint": "^17.3.1",
     "grunt-execute": "^0.2.2",
-    "grunt-mocha-cov": "^0.4.0",
+    "grunt-mocha-istanbul": "^3.0.1",
     "grunt-shell": "^1.1.2",
+    "istanbul": "^0.4.0",
     "jit-grunt": "^0.9.1",
+    "mocha": "^2.3.3",
     "time-grunt": "^1.2.1"
   },
   "dependencies": {

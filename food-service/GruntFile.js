@@ -2,7 +2,6 @@ var pkg = require('./package');
 
 module.exports = function(grunt) {
     require('jit-grunt')(grunt, {
-        mochacov: 'grunt-mocha-cov'
     });
     require('time-grunt')(grunt);
 
@@ -12,11 +11,18 @@ module.exports = function(grunt) {
                 src: "src/main/index.js"
             }
         },
-        mochacov: {
+        mocha_istanbul: {
             options: {
-                reporter: 'spec'
             },
-            server: ['src/test/**/*-spec.js']
+            server: {
+                src: 'src/test',
+                options: {
+                    mask: '**/*-spec.js',
+                    coverageFolder: 'target/coverage',
+                    reportFormats: ['html', 'lcov', 'text', 'text-summary'],
+                    root: 'src'
+                }
+            }
         },
         shell: {
             dockerBuild: {
@@ -72,8 +78,12 @@ module.exports = function(grunt) {
     grunt.registerTask('lint', ['eslint:main', 'eslint:test']);
 
     grunt.registerTask('build', ['lint']);
-    grunt.registerTask('test', ['build', 'mochacov:server']);
+    grunt.registerTask('test', ['build', 'mocha_istanbul:server']);
     grunt.registerTask('start', ['build', 'execute:server']);
 
     grunt.registerTask('default', ['build', 'test']);
+
+    grunt.event.on("*", function() {
+        console.log("Hello");
+    });
 };
