@@ -13,7 +13,7 @@ const units = [
 /**
  * Get the Unit that has the given ID
  * @param {String} id The ID of the Unit to retrieve
- * @return {Unit} the Unit
+ * @return {Promise} A promise for the Unit
  */
 function getUnitById(id) {
     return new Promise((resolve, reject) => {
@@ -28,6 +28,29 @@ function getUnitById(id) {
     });
 }
 
+/**
+ * Get all of the units that match the provided Type and System.
+ * @param {Object} filter The filter to apply
+ * @param {String} filter.type The type to filter on. Optional.
+ * @param {String} filter.system The system to filter on. Optional.
+ * @return {Promise} A promise for the results
+ */
+function getUnits(filter) {
+    const filterParams = filter || {};
+    const filterType = filterParams.type;
+    const filterSystem = filterParams.system;
+    
+    return new Promise((resolve, reject) => {
+        resolve(units.filter((u) => {
+            const matchType = !(filterType && filterType !== u.type);
+            const matchSystem = !(filterSystem && filterSystem !== u.system);
+            
+            return matchType && matchSystem;Ì
+        }));
+    });
+}
+
 module.exports = {
-    getUnitById: getUnitById
+    getUnitById: getUnitById,
+    getUnits: getUnits
 }
