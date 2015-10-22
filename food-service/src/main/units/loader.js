@@ -16,14 +16,16 @@ const units = [
  * @return {Unit} the Unit
  */
 function getUnitById(id) {
-    const result = units.find((u) => {
-        return id === u.id;
-    });
+    return new Promise((resolve, reject) => {
+        const result = units.find((u) => {
+            return id === u.id;
+        });
 
-    if (!result) {
-        throw errors.NotFoundError({id: id});
-    }
-    return result;
+        if (!result) {
+            throw errors.NotFoundError({id: id});
+        }
+        resolve(result);
+    });
 }
 
 module.exports = {

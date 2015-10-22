@@ -6,13 +6,10 @@ describe('units/loader', function() {
     /** @test {getUnitById} */
     describe('#getUnitById()', function () {
         it('should find the correct unit when a valid ID is requested', () => {
-            const unit = UnitLoader.getUnitById('g');
-            expect(unit.id).to.equal('g');
+            return expect(UnitLoader.getUnitById('g')).to.eventually.have.property('id', 'g');
         });
         it('should throw an error when an invalid ID is requested', () => {
-            expect(() => {
-                UnitLoader.getUnitById('unknown')
-            }).to.throw('No Unit with the ID "unknown" was found');
+            return expect(UnitLoader.getUnitById('unknown')).to.eventually.be.rejectedWith('No Unit with the ID "unknown" was found');
         });
     });
 });

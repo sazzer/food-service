@@ -18,6 +18,9 @@ module.exports = function(grunt) {
             server: {
                 src: 'src/test',
                 options: {
+                    require: [
+                        'src/test/setup'
+                    ],
                     mask: '**/*-spec.js',
                     coverageFolder: 'target/coverage',
                     reportFormats: ['html', 'lcov', 'text', 'text-summary'],
