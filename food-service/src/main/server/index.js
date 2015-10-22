@@ -51,18 +51,13 @@ function startServer() {
 
         }
     }, {
-        register: require('hapi-router'),
-        options: {
-            cwd: __dirname,
-            routes: 'routes/**/*.js'
-        }
-    }, {
         register: require('blipp'),
         options: {
             showAuth: true,
             showStart: true
         }
     }], (err) => {
+        require('../units/routes')(server);
         server.start(() => {
             console.log(`Server running on ${server.info.uri}`);
         });
