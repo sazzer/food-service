@@ -3,8 +3,8 @@ const Unit = require('../../main/units/unit');
 const convert = require('../../main/units/convert');
 const errors = require('../../main/units/errors');
 
-/** @test {convert} */
 describe('units', function() {
+    /** @test {convert} */
     describe('#convert()', function () {
         const kgs = new Unit({
             id: 'kg',

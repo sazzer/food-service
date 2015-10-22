@@ -2,8 +2,8 @@ const expect = require('chai').expect;
 const UnitLoader = require('../../main/units/loader');
 const errors = require('../../main/units/errors');
 
-/** @test {convert} */
 describe('units/loader', function() {
+    /** @test {getUnitById} */
     describe('#getUnitById()', function () {
         it('should find the correct unit when a valid ID is requested', () => {
             const unit = UnitLoader.getUnitById('g');
