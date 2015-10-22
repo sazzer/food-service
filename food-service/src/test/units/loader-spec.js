@@ -6,13 +6,18 @@ describe('units/loader', () => {
     /** @test {getUnitById} */
     describe('#getUnitById()',  () => {
         it('should find the correct unit when a valid ID is requested', () => {
-            return expect(UnitLoader.getUnitById('g')).to.eventually.have.property('id', 'g');
+            return Promise.all([
+                expect(UnitLoader.getUnitById('g')).to.eventually.have.property('id', 'g'),
+                expect(UnitLoader.getUnitById('g')).to.eventually.have.property('type', 'weight'),
+                expect(UnitLoader.getUnitById('g')).to.eventually.have.property('system', 'metric'),
+                expect(UnitLoader.getUnitById('g')).to.eventually.have.property('scalingFactor', 1)
+            ]);
         });
         it('should throw an error when an invalid ID is requested', () => {
             return expect(UnitLoader.getUnitById('unknown')).to.eventually.be.rejectedWith('No Unit with the ID "unknown" was found');
         });
     });
-    
+
     /** @test {getUnits} */
     describe('#getUnits()', () => {
         describe('Filtered by a valid Type', () => {

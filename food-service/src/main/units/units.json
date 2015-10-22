@@ -1,0 +1,17 @@
+{
+    "g": {
+        "type": "weight",
+        "system": "metric",
+        "scalingFactor": 1
+    },
+    "lb": {
+        "type": "weight",
+        "system": "imperial",
+        "scalingFactor": 453.592
+    },
+    "oz": {
+        "type": "weight",
+        "system": "imperial",
+        "scalingFactor": 28.3495
+    }
+}

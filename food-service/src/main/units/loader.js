@@ -1,14 +1,16 @@
 const Unit = require('./unit');
 const errors = require('./errors');
+const unitsData = require('./units.json');
 
-const units = [
-    new Unit({
-        id: 'g',
-        type: 'weight',
-        system: 'metric',
-        scalingFactor: 1
-    })
-];
+const units = Object.keys(unitsData).map((u) => {
+    const unitData = unitsData[u];
+    return new Unit({
+        id: u,
+        type: unitData.type,
+        system: unitData.system,
+        scalingFactor: unitData.scalingFactor
+    });
+});
 
 /**
  * Get the Unit that has the given ID
@@ -39,13 +41,13 @@ function getUnits(filter) {
     const filterParams = filter || {};
     const filterType = filterParams.type;
     const filterSystem = filterParams.system;
-    
+
     return new Promise((resolve, reject) => {
         resolve(units.filter((u) => {
             const matchType = !(filterType && filterType !== u.type);
             const matchSystem = !(filterSystem && filterSystem !== u.system);
-            
-            return matchType && matchSystem;Ì
+
+            return matchType && matchSystem;
         }));
     });
 }
