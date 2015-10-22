@@ -1,3 +1,5 @@
+const errors = require('./errors');
+
 /**
  * Calculate a conversion from one unit to another unit
  * @param {Unit} from The unit to convert from
@@ -7,7 +9,11 @@
  */
 function convert(from, to, qty) {
     const realqty = qty || 1;
-    
+
+    if (from.type !== to.type) {
+        throw errors.MismatchedTypeError();
+    }
+
     const fromScalingFactor = from.scalingFactor;
     const toScalingFactor = to.scalingFactor;
     const scalingFactor = fromScalingFactor / toScalingFactor;

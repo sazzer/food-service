@@ -13,6 +13,7 @@ module.exports = function(grunt) {
         },
         mocha_istanbul: {
             options: {
+                mochaOptions: ['--growl']
             },
             server: {
                 src: 'src/test',
