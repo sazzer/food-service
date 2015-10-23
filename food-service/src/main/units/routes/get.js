@@ -1,3 +1,5 @@
+'use strict';
+
 const Joi = require('joi');
 const Boom = require('boom');
 const UnitsLoader = require('../loader');
@@ -16,13 +18,21 @@ module.exports = {
         handler: (request, reply) => {
             UnitsLoader.getUnitById(request.params.unit)
                 .catch((e) => {
-                    console.log(e);
-                    return Boom.NotFoundError(e.message, e.id);
+                    let response;
+                    if (e.type === 'units.notFound') {
+                        response = Boom.notFound(e.message, e.id);
+                    }
+
+                    if (!response) {
+                        throw e;
+                    } else {
+                        return response;
+                    }
                 })
-                .then((response) => {
-                    console.log(response);
-                    reply(response);
-                });
+                .catch((e) => {
+                    return Boom.badImplementation();
+                })
+                .then(reply);
         }
     }
 };
